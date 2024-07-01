@@ -63,3 +63,25 @@ int initialize_users_database(sqlite3 *db) {
   return EXIT_SUCCESS;
 }
 
+int initialize_all_databases() {
+  sqlite3 *db;       /* Initialization  of the database pointer address*/
+  char *err_msg = 0; /* Initialization of the err_msg */
+
+  /* Opening of the sqlite3 database */
+  int rc = sqlite3_open("atm.db", &db);
+
+  /* checking if the database did  open sucessfully */
+  if (rc != SQLITE_OK) {
+    /* close the database connection if an error occured */
+    sqlite3_close(db);
+    return 1; // exit status to indicated that an error had occured.
+  }
+
+  /* Create Users and Records tables if no error occured */
+  initialize_users_database(db);
+  initialize_records_database(db);
+
+  // Close the database connection after creating the databases
+  sqlite3_close(db);
+  return 0; // Exit status code
+}
