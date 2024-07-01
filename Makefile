@@ -1,16 +1,16 @@
-objects = src/main.o src/system.o src/auth.o
+CC=gcc
 
-atm : $(objects)
-	cc -o atm $(objects)
+SRCS=$(wildcard ./src/*.c ./src/queries/*.c)
+OBJS=$(SRCS:.c=.o)
 
-main.o : src/header.h
-kbd.o : src/header.h
-command.o : src/header.h
-display.o : src/header.h
-insert.o : src/header.h
-search.o : src/header.h
-files.o : src/header.h
-utils.o : src/header.h
+
+MAIN=atm
+
+all:    $(MAIN)
+	@echo  Program has been compiled.
+
+$(MAIN): $(OBJS) 
+	$(CC) -o $(MAIN) $(OBJS) libsqlite3.a
 
 clean :
-	rm -f $(objects)
+	rm -f $(OBJS) ./src/queries/*.o
