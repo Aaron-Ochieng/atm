@@ -1,7 +1,6 @@
 #include "header.h"
 #include "queries/queries.h"
 #include <stdio.h>
-#include <string.h>
 #include <termios.h>
 
 void loginMenu(char a[50], char pass[50]) {
