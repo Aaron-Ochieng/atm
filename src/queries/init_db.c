@@ -1,5 +1,4 @@
-#include "sqlite3.h"
-#include "stdio.h"
+#include "queries.h"
 #include "stdlib.h"
 #include <string.h>
 
@@ -12,7 +11,7 @@ int callback(void *str, int argc, char **argv, char **azColName) {
   return 0;
 }
 
-int initialize_records_database(sqlite3 *db) {
+int initialize_records_database() {
   char *err_msg; /* To store any error messages that may occur when execting sql
                     query */
 
@@ -37,8 +36,7 @@ int initialize_records_database(sqlite3 *db) {
 
   /* checks if the above function returns an error */
   if (rc != SQLITE_OK) {
-    printf("records error: %s", err_msg);
-
+    log_error(sqlite3_errmsg(db));
     /* closes the database connection if there was an error */
     sqlite3_close(db);
     return SQLITE_ERROR;
@@ -46,7 +44,7 @@ int initialize_records_database(sqlite3 *db) {
   /* Return status if the whole function executes without errors*/
   return SQLITE_OK;
 }
-int initialize_users_database(sqlite3 *db) {
+int initialize_users_database() {
   char *err_msg;
   char *sql =
       "CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT "
@@ -55,33 +53,32 @@ int initialize_users_database(sqlite3 *db) {
   int rc = sqlite3_exec(db, sql, callback, 0, &err_msg);
 
   if (rc != SQLITE_OK) {
-    printf("sqlite error: %s", err_msg);
-    sqlite3_close(db);
+    log_error(sqlite3_errmsg(db));
+    close_db_con();
     return EXIT_FAILURE;
   }
 
   return EXIT_SUCCESS;
 }
 
-int initialize_all_databases() {
-  sqlite3 *db;       /* Initialization  of the database pointer address*/
+void initialize_all_databases() {
   char *err_msg = 0; /* Initialization of the err_msg */
 
   /* Opening of the sqlite3 database */
-  int rc = sqlite3_open("atm.db", &db);
+  int rc = initialize_db_conn();
 
   /* checking if the database did  open sucessfully */
   if (rc != SQLITE_OK) {
     /* close the database connection if an error occured */
-    sqlite3_close(db);
-    return 1; // exit status to indicated that an error had occured.
+    close_db_con();
+    exit(1);
+    ; // exit status to indicated that an error had occured.
   }
 
   /* Create Users and Records tables if no error occured */
-  initialize_users_database(db);
-  initialize_records_database(db);
+  initialize_users_database();
+  initialize_records_database();
 
   // Close the database connection after creating the databases
-  sqlite3_close(db);
-  return 0; // Exit status code
+  close_db_con();
 }
