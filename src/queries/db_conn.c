@@ -12,3 +12,9 @@ int initialize_db_conn() {
   return rc;
 }
 
+void close_db_con(void) {
+  if (db) {
+    sqlite3_close(db);
+    db = NULL;
+  }
+}
