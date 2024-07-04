@@ -54,6 +54,8 @@ void mainMenu(struct User u) {
 void initMenu(struct User *u) {
   int r = 0;
   int option;
+  char option_string[1];
+
   system("clear");
   printf("\n\n\t\t======= ATM =======\n");
   printf("\n\t\t-->> Feel free to login / register :\n");
@@ -61,7 +63,8 @@ void initMenu(struct User *u) {
   printf("\n\t\t[2]- register\n");
   printf("\n\t\t[3]- exit\n");
   while (!r) {
-    scanf("%d", &option);
+    scanf("%s", option_string);
+    option = atoi(option_string);
     switch (option) {
     case 1:
       loginMenu(u->name, u->password);
