@@ -1,9 +1,8 @@
 #include "header.h"
 #include "queries/queries.h"
 #include <stdio.h>
+#include <string.h>
 #include <termios.h>
-
-char *USERS = "./data/users.txt";
 
 void loginMenu(char a[50], char pass[50]) {
   struct termios oflags, nflags;
@@ -33,26 +32,9 @@ void loginMenu(char a[50], char pass[50]) {
 };
 
 const char *getPassword(struct User u) {
-  FILE *fp;
-  struct User userChecker;
-
-  if ((fp = fopen("./data/users.txt", "r")) == NULL) {
-    printf("Error! opening file");
-    exit(1);
-  }
-
-  while (fscanf(fp, "%s %s", userChecker.name, userChecker.password) != EOF) {
-    if (strcmp(userChecker.name, u.name) == 0) {
-      fclose(fp);
-      char *buff = userChecker.password;
-      return buff;
-    }
-  }
-
-  fclose(fp);
-  return "no user found";
+  char *password = get_user_pass(u.name);
+  return password;
 }
-
 void registerMenu(char *a, char *pass) {
   printf("\n\t\tEnter name:\t");
   scanf("%s", a);
