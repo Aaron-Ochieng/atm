@@ -1,4 +1,6 @@
 #include "header.h"
+#include "queries/queries.h"
+#include <stdio.h>
 #include <termios.h>
 
 char *USERS = "./data/users.txt";
@@ -39,8 +41,7 @@ const char *getPassword(struct User u) {
     exit(1);
   }
 
-  while (fscanf(fp, "%d %s %s", &userChecker.id, userChecker.name,
-                userChecker.password) != EOF) {
+  while (fscanf(fp, "%s %s", userChecker.name, userChecker.password) != EOF) {
     if (strcmp(userChecker.name, u.name) == 0) {
       fclose(fp);
       char *buff = userChecker.password;
@@ -50,4 +51,17 @@ const char *getPassword(struct User u) {
 
   fclose(fp);
   return "no user found";
+}
+
+void registerMenu(char *a, char *pass) {
+  printf("\n\t\tEnter name:\t");
+  scanf("%s", a);
+  printf("\n\n\t\tEnter password:\t");
+  scanf("%s", pass);
+
+  int rc = insert_user(a, pass);
+  if (rc == SQLITE_CONSTRAINT) {
+    printf("\n\t\tUser already exist");
+    exit(0);
+  }
 }
