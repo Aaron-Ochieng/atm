@@ -1,4 +1,6 @@
 #include "header.h"
+#include "queries/sqlite3.h"
+#include <stdio.h>
 
 void stayOrReturn(int notGood, void f(struct User u), struct User u) {
   int option;
@@ -61,13 +63,6 @@ noAccount:
   scanf("%d/%d/%d", &r.deposit.month, &r.deposit.day, &r.deposit.year);
   printf("\nEnter the account number:");
   scanf("%d", &r.accountNbr);
-
-  // while (getAccountFromFile(pf, userName, &cr)) {
-  //   if (strcmp(userName, u.name) == 0 && cr.accountNbr == r.accountNbr) {
-  //     printf("✖ This Account already exists for this user\n\n");
-  //     goto noAccount;
-  //   }
-  // }
   printf("\nEnter the country:");
   scanf("%s", r.country);
   printf("\nEnter the phone number:");
@@ -79,6 +74,11 @@ noAccount:
          "years)\n\n\tEnter your choice:");
   scanf("%s", r.accountType);
 
+  int result = new_record(r, u.name);
+  if (result == SQLITE_CONSTRAINT) {
+    printf("✖ This Account already exists for this user\n\n");
+    goto noAccount;
+  }
   success(u);
 }
 
