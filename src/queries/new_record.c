@@ -1,7 +1,6 @@
 #include "../header.h"
 #include "queries.h"
 #include "sqlite3.h"
-#include <stdio.h>
 
 int new_record(struct Record r, char *name) {
   sqlite3 *db;
