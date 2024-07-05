@@ -1,5 +1,6 @@
 #include "header.h"
 #include "queries/sqlite3.h"
+#include "stdbool.h"
 #include <stdio.h>
 
 void stayOrReturn(int notGood, void f(struct User u), struct User u) {
@@ -50,6 +51,20 @@ invalid:
   }
 }
 
+bool valid_date(int month, int day, int year) {
+  if (month < 1 || month > 12) {
+    return false;
+  }
+  if (day < 1 || day > 30) {
+    return false;
+  }
+
+  if (year < 1900 || year > 2100) {
+    return false;
+  }
+  return true;
+}
+
 void createNewAcc(struct User u) {
   struct Record r;
   struct Record cr;
@@ -61,6 +76,9 @@ noAccount:
 
   printf("\nEnter today's date(mm/dd/yyyy):");
   scanf("%d/%d/%d", &r.deposit.month, &r.deposit.day, &r.deposit.year);
+  if (!valid_date(r.deposit.month, r.deposit.day, r.deposit.year)) {
+    goto noAccount;
+  }
   printf("\nEnter the account number:");
   scanf("%d", &r.accountNbr);
   printf("\nEnter the country:");
