@@ -47,7 +47,7 @@ int update_phone(int acc_number, int phone, int user_id) {
   }
 
   char *sql =
-      "UPDATE Records SET phone = ? WHERE accountNbr = ? AND user_id = ?";
+      "UPDATE Records SET phone = ? WHERE accountNbr = ? AND userId = ?";
   rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
 
   if (rc != SQLITE_OK) {
