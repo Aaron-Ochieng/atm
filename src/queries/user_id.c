@@ -20,7 +20,7 @@ int get_user_id(char *username) {
 
   sqlite3_bind_text(stmt, 1, username, -1, SQLITE_STATIC);
   if ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
-    user_id = sqlite3_column_int(stmt, 1);
+    user_id = sqlite3_column_int(stmt, 0);
   } else {
     log_error(sqlite3_errmsg(db));
     close_db_con();
