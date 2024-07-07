@@ -32,9 +32,9 @@ int check_user_accounts(int user_id) {
     printf("\t\tDeposit date: %d/%d/%d\n", sqlite3_column_int(stmt, 1),
            sqlite3_column_int(stmt, 2), sqlite3_column_int(stmt, 3));
     printf("\t\tCountry: %s\n", sqlite3_column_text(stmt, 4));
-    printf("\t\tPhone number: %d\n", sqlite3_column_int(stmt, 6));
-    printf("\t\tAmount Deposited: %.2f\n", sqlite3_column_double(stmt, 7));
-    printf("\t\tType of Account: %s\n", sqlite3_column_text(stmt, 8));
+    printf("\t\tPhone number: %d\n", sqlite3_column_int(stmt, 5));
+    printf("\t\tAmount Deposited: %.2f\n", sqlite3_column_double(stmt, 6));
+    printf("\t\tType of Account: %s\n", sqlite3_column_text(stmt, 7));
     printf("\t\t________________________________________\n");
   }
 
