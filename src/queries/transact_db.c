@@ -89,3 +89,51 @@ int withdraw_from_account(int account_number, double amount_to_deduct,
 
   return SQLITE_OK;
 }
+
+int deposit_to_account(int account_number, double amount_to_deposit,
+                       int user_id) {
+  sqlite3_stmt *stmt;
+  double accountBalance;
+
+  double amountInAccount = check_amount(account_number, user_id);
+  accountBalance = amountInAccount + amount_to_deposit;
+  //
+  int rc = sqlite3_open("atm.db", &db);
+  if (rc != SQLITE_OK) {
+    log_error(sqlite3_errmsg(db));
+    sqlite3_close(db);
+  }
+  //
+  char *sql =
+      "UPDATE Records SET amount = ? WHERE accountNbr = ? AND userId = ?";
+
+  rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
+  if (rc != SQLITE_OK) {
+    log_error(sqlite3_errmsg(db));
+    close_db_con();
+    return SQLITE_ERROR;
+  }
+
+  sqlite3_bind_int(stmt, 1, accountBalance);
+  sqlite3_bind_int(stmt, 2, account_number);
+  sqlite3_bind_int(stmt, 3, user_id);
+
+  //
+  rc = sqlite3_step(stmt);
+  if (rc != SQLITE_DONE) {
+
+    log_error(sqlite3_errmsg(db));
+    close_db_con();
+    return SQLITE_ERROR;
+  }
+  if (rc != SQLITE_OK) {
+    log_error(sqlite3_errmsg(db));
+    close_db_con();
+    return SQLITE_ERROR;
+  }
+
+  sqlite3_finalize(stmt);
+  sqlite3_close(db);
+
+  return SQLITE_OK;
+}
