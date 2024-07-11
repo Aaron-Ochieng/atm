@@ -1,0 +1,71 @@
+#include "header.h"
+#include "queries/queries.h"
+#include <stdio.h>
+
+void makeTransaction(struct User u) {
+  printf("User Id ==  %d", u.id);
+  struct Record r;
+  char temp_acc[100];
+  char temp_choice[2];
+
+  printf("\n\t\tEnter the account number of the customer: ");
+  scanf("%s", temp_acc);
+
+  /* check for valid integer */
+  if (atm_atoi(temp_acc) < 0) {
+    printf("\n\t\tInvalid account number.\n");
+    choose_exit_or_menu(u);
+  }
+  r.accountNbr = atm_atoi(temp_acc);
+
+  /* check if user truly owns an account */
+  if (!owns_account(r.accountNbr, u.id)) {
+    printf("\n\t\tAccount number doesn't exist!\n");
+    choose_exit_or_menu(u);
+  }
+
+  /* check if account number exists */
+  if (!check_acc_number(r.accountNbr)) {
+    printf("\n\t\tAccount doesn't exist.\n");
+    choose_exit_or_menu(u);
+  }
+
+  printf("\n\t\tDo you want to:\n\t\t\t1->Withdraw\n\t\t\t2->Deposit\n");
+  scanf("%s", temp_choice);
+
+  /* validating input */
+  if (atm_atoi(temp_choice) < 1 || atm_atoi(temp_choice) > 2) {
+    printf("\n\t\tInvalid choice.\n");
+    choose_exit_or_menu(u);
+  }
+
+  int choice = atm_atoi(temp_choice);
+
+  if (choice == 1) {
+    printf("\n\t\tEnter the amount you want to withdraw: ");
+    scanf("%lf", &r.amount);
+
+    if (r.amount < 1) {
+      printf("The withdrawal amount must be greater than 0.\n");
+      choose_exit_or_menu(u);
+    }
+
+    if (withdraw_from_account(r.accountNbr, r.amount, u.id) == -10) {
+      printf("\n\t\tThe amount you choose to withdraw is superior to your "
+             "available balance!");
+      choose_exit_or_menu(u);
+    }
+    printf("\n\n\t\tSuccess");
+  } else if (choice == 2) {
+    printf("\n\t\tEnter the amount you want to deposit: ");
+    scanf("%lf", &r.amount);
+
+    if (r.amount < 1) {
+      printf("\n\t\tInvalid amount to deposit!");
+      choose_exit_or_menu(u);
+    }
+    deposit_to_account(r.accountNbr, r.amount, u.id);
+    printf("\n\t\tSuccess!");
+  }
+  choose_exit_or_menu(u);
+}
