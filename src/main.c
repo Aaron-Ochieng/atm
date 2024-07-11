@@ -75,6 +75,8 @@ void initMenu(struct User *u) {
         printf("\nWrong password!! or User Name\n");
         exit(1);
       }
+      int user_id = get_user_id(u->name);
+      u->id = user_id;
       r = 1;
       break;
     case 2:
