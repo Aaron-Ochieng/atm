@@ -1,13 +1,13 @@
 #include "queries.h"
 
-double check_amount(int account_number, int user_id) {
+double check_amount(int account_number) {
   /*Initialize amount*/
   double amount = -1;
 
   sqlite3_stmt *stmt;
 
   /*sql query*/
-  char *sql = "SELECT amount FROM Records WHERE accountNbr = ? AND userID = ?";
+  char *sql = "SELECT amount FROM Records WHERE accountNbr = ?";
 
   int rc = initialize_db_conn();
   if (rc != SQLITE_OK) {
@@ -25,7 +25,6 @@ double check_amount(int account_number, int user_id) {
 
   //
   sqlite3_bind_int(stmt, 1, account_number);
-  sqlite3_bind_int(stmt, 2, user_id);
   while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
     amount = sqlite3_column_double(stmt, 0);
   }
@@ -45,7 +44,7 @@ int withdraw_from_account(int account_number, double amount_to_deduct,
   sqlite3_stmt *stmt;
   double accountBalance;
 
-  double amountInAccount = check_amount(account_number, user_id);
+  double amountInAccount = check_amount(account_number);
   if (amount_to_deduct > amountInAccount) {
     return -10;
   }
@@ -95,7 +94,7 @@ int deposit_to_account(int account_number, double amount_to_deposit,
   sqlite3_stmt *stmt;
   double accountBalance;
 
-  double amountInAccount = check_amount(account_number, user_id);
+  double amountInAccount = check_amount(account_number);
   accountBalance = amountInAccount + amount_to_deposit;
   //
   int rc = sqlite3_open("atm.db", &db);
