@@ -1,7 +1,6 @@
 #include "queries.h"
 
-double check_amount(int account_number)
-{
+double check_amount(int account_number) {
   /*Initialize amount*/
   double amount = -1;
 
@@ -11,16 +10,14 @@ double check_amount(int account_number)
   char *sql = "SELECT amount FROM Records WHERE accountNbr = ?";
 
   int rc = initialize_db_conn();
-  if (rc != SQLITE_OK)
-  {
+  if (rc != SQLITE_OK) {
     log_error(sqlite3_errmsg(db));
     close_db_con();
     return -1;
   }
 
   rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
-  if (rc != SQLITE_OK)
-  {
+  if (rc != SQLITE_OK) {
     log_error(sqlite3_errmsg(db));
     close_db_con();
     return -1;
@@ -28,13 +25,11 @@ double check_amount(int account_number)
 
   //
   sqlite3_bind_int(stmt, 1, account_number);
-  while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
-  {
+  while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
     amount = sqlite3_column_double(stmt, 0);
   }
 
-  if (rc != SQLITE_DONE)
-  {
+  if (rc != SQLITE_DONE) {
     log_error(sqlite3_errmsg(db));
     close_db_con();
     return -1;
@@ -45,31 +40,26 @@ double check_amount(int account_number)
 }
 
 int withdraw_from_account(int account_number, double amount_to_deduct,
-                          int user_id)
-{
+                          int user_id) {
   sqlite3_stmt *stmt;
   double accountBalance;
 
   double amountInAccount = check_amount(account_number);
-  if ((amountInAccount - amount_to_deduct) < 0)
-  {
+  if ((amountInAccount - amount_to_deduct) < 0) {
     return -10;
   }
   //
   int rc = initialize_db_conn();
-  if (rc != SQLITE_OK)
-  {
+  if (rc != SQLITE_OK) {
     log_error(sqlite3_errmsg(db));
     sqlite3_close(db);
   }
   //
   accountBalance = amountInAccount - amount_to_deduct;
-  char *sql =
-      "UPDATE Records SET amount = ? WHERE accountNbr = ?";
+  char *sql = "UPDATE Records SET amount = ? WHERE accountNbr = ?";
 
   rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
-  if (rc != SQLITE_OK)
-  {
+  if (rc != SQLITE_OK) {
     log_error(sqlite3_errmsg(db));
     sqlite3_close(db);
     return SQLITE_ERROR;
@@ -81,14 +71,12 @@ int withdraw_from_account(int account_number, double amount_to_deduct,
 
   //
   rc = sqlite3_step(stmt);
-  if (rc != SQLITE_DONE)
-  {
+  if (rc != SQLITE_DONE) {
     log_error(sqlite3_errmsg(db));
     close_db_con();
     return SQLITE_ERROR;
   }
-  if (rc != SQLITE_OK)
-  {
+  if (rc != SQLITE_OK) {
     log_error(sqlite3_errmsg(db));
     close_db_con();
     return SQLITE_ERROR;
@@ -101,8 +89,7 @@ int withdraw_from_account(int account_number, double amount_to_deduct,
 }
 
 int deposit_to_account(int account_number, double amount_to_deposit,
-                       int user_id)
-{
+                       int user_id) {
   sqlite3_stmt *stmt;
   double accountBalance;
 
@@ -110,8 +97,7 @@ int deposit_to_account(int account_number, double amount_to_deposit,
   accountBalance = amountInAccount + amount_to_deposit;
   //
   int rc = initialize_db_conn();
-  if (rc != SQLITE_OK)
-  {
+  if (rc != SQLITE_OK) {
     log_error(sqlite3_errmsg(db));
     sqlite3_close(db);
   }
@@ -120,8 +106,7 @@ int deposit_to_account(int account_number, double amount_to_deposit,
       "UPDATE Records SET amount = ? WHERE accountNbr = ? AND userId = ?";
 
   rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
-  if (rc != SQLITE_OK)
-  {
+  if (rc != SQLITE_OK) {
     log_error(sqlite3_errmsg(db));
     close_db_con();
     return SQLITE_ERROR;
@@ -133,14 +118,12 @@ int deposit_to_account(int account_number, double amount_to_deposit,
 
   //
   rc = sqlite3_step(stmt);
-  if (rc != SQLITE_DONE)
-  {
+  if (rc != SQLITE_DONE) {
     log_error(sqlite3_errmsg(db));
     close_db_con();
     return SQLITE_ERROR;
   }
-  if (rc != SQLITE_OK)
-  {
+  if (rc != SQLITE_OK) {
     log_error(sqlite3_errmsg(db));
     close_db_con();
     return SQLITE_ERROR;
