@@ -35,9 +35,12 @@ const char *getPassword(struct User u);
 void createNewAcc(struct User u);
 void mainMenu(struct User u);
 void checkAllAccounts(struct User u);
+void checkAccount(struct User u);
+void makeTransaction(struct User u);
 
 // Other functions
 int atm_atoi(const char *input);
 void updateAccountInfo(struct User u);
 int new_record(struct Record r, char *name);
 void read_string(char *buffer, size_t size);
+void choose_exit_or_menu(struct User u);
