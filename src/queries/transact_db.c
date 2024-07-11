@@ -1,6 +1,6 @@
 #include "queries.h"
 
-double check_amount(int account_number, int user_id) {
+double check_amount(int account_number) {
   /*Initialize amount*/
   double amount = -1;
 
