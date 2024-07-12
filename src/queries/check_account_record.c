@@ -86,10 +86,10 @@ outofwhileloop:
            accountNumber);
   }
   if (rc != SQLITE_DONE) {
-    sqlite3_close(db);
+    close_db_con();
     return rc;
   }
   sqlite3_finalize(stmt);
-  sqlite3_close(db);
+  close_db_con();
   return SQLITE_OK;
 }
