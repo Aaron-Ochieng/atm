@@ -3,7 +3,6 @@
 #include <stdio.h>
 
 void makeTransaction(struct User u) {
-  printf("User Id ==  %d", u.id);
   struct Record r;
   char temp_acc[100];
   char temp_choice[2];
@@ -51,8 +50,8 @@ void makeTransaction(struct User u) {
     }
 
     if (withdraw_from_account(r.accountNbr, r.amount, u.id) == -10) {
-      printf("\n\t\tThe amount you choose to withdraw is superior to your "
-             "available balance!");
+      printf("\n\t\t✗ The amount you choose to withdraw is superior to your "
+             "available balance! \n\n");
       choose_exit_or_menu(u);
     }
     printf("\n\n\t\tSuccess");
