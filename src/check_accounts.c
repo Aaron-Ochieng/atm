@@ -21,7 +21,7 @@ void checkAllAccounts(struct User u) {
   system("clear");
   int user_id = get_user_id(u.name);
 
-  printf("\n\t\t=========All Accounts %d =========\n", user_id);
+  printf("\n\t\t========= All Accounts %d =========\n", user_id);
   if (check_user_accounts(user_id) != SQLITE_OK) {
     printf("\n\t\tAn error occured.\n");
   }
