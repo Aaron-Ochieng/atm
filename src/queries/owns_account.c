@@ -5,6 +5,10 @@ bool owns_account(int acc_number, int user_id) {
   sqlite3_stmt *stmt;
 
   int rc = initialize_db_conn();
+  if (rc != SQLITE_OK) {
+    close_db_con();
+    return false;
+  }
 
   char *sql = "SELECT 1 FROM Records WHERE userId = ? AND accountNbr = ?";
 
