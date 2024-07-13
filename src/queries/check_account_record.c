@@ -3,7 +3,7 @@
 #include "sqlite3.h"
 #include "stdio.h"
 
-int check_account_record(int accountNumber, int user_id, bool displayProfits) {
+int check_account_record(int accountNumber, int user_id) {
   sqlite3_stmt *stmt;
   float interest;
   struct Record r;
@@ -51,9 +51,6 @@ int check_account_record(int accountNumber, int user_id, bool displayProfits) {
     printf("\t\tAmount deposited:\t%.2f\n", r.amount);
     printf("\t\tType of Account:\t%s\n", r.accountType);
 
-    if (displayProfits != true) {
-      goto outofwhileloop;
-    }
   displayprofits:
     if (strcmp(r.accountType, "saving") == 0) {
       interest = r.amount * 0.07 * (1.0 / 12);
@@ -80,12 +77,12 @@ int check_account_record(int accountNumber, int user_id, bool displayProfits) {
              "type current");
     }
   }
-outofwhileloop:
   if (recordExist != true) {
     printf("\n\n\t\t\x1b[38;2;255;131;131m ✗ Account %d not found.\n\x1b[0m",
            accountNumber);
   }
   if (rc != SQLITE_DONE) {
+    log_error(sqlite3_errmsg(db));
     close_db_con();
     return rc;
   }
