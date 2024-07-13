@@ -38,7 +38,7 @@ int initialize_records_database() {
   if (rc != SQLITE_OK) {
     log_error(sqlite3_errmsg(db));
     /* closes the database connection if there was an error */
-    sqlite3_close(db);
+    close_db_con();
     return SQLITE_ERROR;
   }
   /* Return status if the whole function executes without errors*/

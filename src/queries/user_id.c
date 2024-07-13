@@ -6,6 +6,7 @@ int get_user_id(char *username) {
 
   int rc = initialize_db_conn();
   if (rc != SQLITE_OK) {
+    close_db_con();
     return -1;
   }
 

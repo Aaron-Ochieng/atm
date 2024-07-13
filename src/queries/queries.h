@@ -14,10 +14,11 @@ int update_country(int acc_number, char *country, int user_id);
 int update_phone(int acc_number, int phone, int user_id);
 bool owns_account(int acc_number, int user_id);
 int check_user_accounts(int user_id);
-int check_account_record(int acc_number, int user_id, bool displayProfits);
+int check_account_record(int acc_number, int user_id);
 bool check_acc_number(int accountNbr);
 double check_amount(int account_number);
 int deposit_to_account(int account_number, double amount_to_deposit,
                        int user_id);
 int withdraw_from_account(int account_number, double amount_to_deduct,
                           int user_id);
+int delete_account(int accountNbr, int user_id);

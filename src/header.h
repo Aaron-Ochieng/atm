@@ -44,3 +44,5 @@ void updateAccountInfo(struct User u);
 int new_record(struct Record r, char *name);
 void read_string(char *buffer, size_t size);
 void choose_exit_or_menu(struct User u);
+void deleteAccount(struct User u);
+int account_info(int accountNumber, int user_id);

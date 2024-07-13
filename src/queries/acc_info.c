@@ -1,9 +1,7 @@
 #include "../header.h"
 #include "queries.h"
-#include "sqlite3.h"
-#include "stdio.h"
 
-int check_account_record(int accountNumber, int user_id) {
+int account_info(int accountNumber, int user_id) {
   sqlite3_stmt *stmt;
   float interest;
   struct Record r;
@@ -50,36 +48,6 @@ int check_account_record(int accountNumber, int user_id) {
     printf("\t\tPhone Number:\t%d\n", r.phone);
     printf("\t\tAmount deposited:\t%.2f\n", r.amount);
     printf("\t\tType of Account:\t%s\n", r.accountType);
-
-  displayprofits:
-    if (strcmp(r.accountType, "saving") == 0) {
-      interest = r.amount * 0.07 * (1.0 / 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day 10 of every month.",
-             interest);
-
-    } else if (strcmp(r.accountType, "fixed01") == 0) {
-      interest = r.amount * 0.04 * (1.0 / 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day 10 of every month.",
-             interest);
-
-    } else if (strcmp(r.accountType, "fixed02") == 0) {
-      interest = r.amount * 0.05 * (2.0 / 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day 10 of every month.",
-             interest);
-
-    } else if (strcmp(r.accountType, "fixed03") == 0) {
-      interest = r.amount * 0.08 * (3.0 / 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day 10 of every month.",
-             interest);
-
-    } else if (strcmp(r.accountType, "current") == 0) {
-      printf("\n\n\t\tYou will not get interests because the account is of "
-             "type current");
-    }
-  }
-  if (recordExist != true) {
-    printf("\n\n\t\t\x1b[38;2;255;131;131m ✗ Account %d not found.\n\x1b[0m",
-           accountNumber);
   }
   if (rc != SQLITE_DONE) {
     log_error(sqlite3_errmsg(db));
