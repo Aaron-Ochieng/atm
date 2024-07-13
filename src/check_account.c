@@ -16,7 +16,7 @@ void checkAccount(struct User u) {
   r.accountNbr = atm_atoi(temp);
 
   int user_id = get_user_id(u.name);
-  if (check_account_record(r.accountNbr, user_id, true) != SQLITE_OK) {
+  if (check_account_record(r.accountNbr, user_id) != SQLITE_OK) {
     printf("\n\t\tOops, an error occured !\n");
     choose_exit_or_menu(u);
   }
