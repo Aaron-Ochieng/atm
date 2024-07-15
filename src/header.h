@@ -37,6 +37,7 @@ void mainMenu(struct User u);
 void checkAllAccounts(struct User u);
 void checkAccount(struct User u);
 void makeTransaction(struct User u);
+void transferAccount(struct User u);
 
 // Other functions
 int atm_atoi(const char *input);
