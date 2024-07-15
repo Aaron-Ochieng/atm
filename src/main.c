@@ -46,6 +46,7 @@ void mainMenu(struct User u) {
   case 7:
     // student TODO : add your **Transfer owner** function
     // here
+    transferAccount(u);
     break;
   case 8:
     exit(1);
