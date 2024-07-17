@@ -32,6 +32,7 @@ void loginMenu(char a[50], char pass[50]) {
 
 const char *getPassword(struct User u) {
   char *password = get_user_pass(u.name);
+  rot13(password);
   return password;
 }
 void registerMenu(char *a, char *pass) {
@@ -40,6 +41,7 @@ void registerMenu(char *a, char *pass) {
   printf("\n\n\t\tEnter password:\t");
   scanf("%s", pass);
 
+  rot13(pass);
   int rc = insert_user(a, pass);
   if (rc == SQLITE_CONSTRAINT) {
     printf("\n\t\tUser already exist");
