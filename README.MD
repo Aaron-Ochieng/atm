@@ -57,3 +57,11 @@ Password: q1w2e3r4t5y6
 Username: Michel 
 Password: q1w2e3r4t5y6
 ```
+
+*Password hashing algorithm* : The project uses `ROT13` algorithm for hashing user passwords before storing them in the sqlite database.
+
+
+
+***Creating an account.***
+
+Creating account has a feature which you cannot add a month greater than `12` and year `must` be between the year `1900` - `2100`. if not the account won't be created.
