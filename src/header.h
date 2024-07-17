@@ -47,3 +47,4 @@ void read_string(char *buffer, size_t size);
 void choose_exit_or_menu(struct User u);
 void deleteAccount(struct User u);
 int account_info(int accountNumber, int user_id);
+void rot13(char *str);
