@@ -1,1 +1,59 @@
-<iframe width="560" height="315" src="https://learn.zone01kisumu.ke/git/aaochieng/atm-management-system/src/branch/main/assets/1.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+# ATM MANAGEMENT SYSTEM
+
+This repository contains a simple **ATM (Automated Teller Machine)** program implemented in `C` and `sqlite3 database` for storing user credentials and records. 
+
+The program simulates basic banking operations, including:
+
+1. *Creating new account*
+
+2. *Updating account information*
+
+3. *Checking accounts*
+
+4. *Checking list of owned accounts*
+
+5. *Make transaction*
+
+6. *Remove an existing account*
+
+7. *Transfer ownership*
+
+#### *Prerequisites*
+
+Make sure you have `gcc` and `bash` installed on your system before continuing.
+
+#### *Cloning and setup*
+
+To clone the project.
+
+```bash
+git clone https://learn.zone01kisumu.ke/git/aaochieng/atm-management-system.git
+cd atm-management-system
+```
+
+Run the compiler shell script to download necessarry files and compile the project.
+
+```bash
+sh compiler.sh
+```
+
+The compiler shell script first checks if compiled `libsqlite3.a`, static library that contains the compiled object file(s).
+
+The static library is then linked with the  application during the final build process.
+
+To execute the built binary file of the project , run 
+
+```bash
+./atm
+```
+
+You may either choose to create your own account to explore the ATM program or login with one of the below credentials.
+
+```textile
+Username: Alice 
+Password: q1w2e3r4t5y6
+
+
+Username: Michel 
+Password: q1w2e3r4t5y6
+```
