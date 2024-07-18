@@ -44,7 +44,7 @@ void registerMenu(char *a, char *pass) {
   rot13(pass);
   int rc = insert_user(a, pass);
   if (rc == SQLITE_CONSTRAINT) {
-    printf("\n\t\tUser already exist!\n");
+    printf("\n\t\tUser already exist!\n\n\n");
     exit(0);
   }
 }
