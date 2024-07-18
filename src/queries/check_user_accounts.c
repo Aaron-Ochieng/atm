@@ -35,7 +35,7 @@ int check_user_accounts(int user_id) {
     printf("\t\tPhone number: %d\n", sqlite3_column_int(stmt, 5));
     printf("\t\tAmount Deposited: %.2f\n", sqlite3_column_double(stmt, 6));
     printf("\t\tType of Account: %s\n", sqlite3_column_text(stmt, 7));
-    printf("\t\t___________________________________\n");
+    printf("\t\t___________________________________\n\n");
   }
 
   if (count == 0) {
