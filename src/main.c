@@ -74,7 +74,7 @@ void initMenu(struct User *u) {
     case 1:
       loginMenu(u->name, u->password);
       if (strcmp(u->password, getPassword(*u)) != 0) {
-        printf("\nWrong password!! or User Name\n");
+        printf("\n\t\tWrong password!! or User Name\n\n\n");
         exit(1);
       }
       int user_id = get_user_id(u->name);
