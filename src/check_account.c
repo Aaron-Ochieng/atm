@@ -6,7 +6,7 @@ void checkAccount(struct User u) {
   struct Record r;
   char temp[100];
   system("clear");
-  printf("i\n\t\tEnter your account number: ");
+  printf("\n\t\tEnter your account number: ");
   scanf("%s", temp);
   //
   // checking for only integer account number
