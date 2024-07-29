@@ -3,21 +3,26 @@
 #include "stdbool.h"
 #include <stdio.h>
 
-bool valid_date(int month, int day, int year) {
-  if (month < 1 || month > 12) {
+bool valid_date(int month, int day, int year)
+{
+  if (month < 1 || month > 12)
+  {
     return false;
   }
-  if (day < 1 || day > 30) {
+  if (day < 1 || day > 30)
+  {
     return false;
   }
 
-  if (year < 1900 || year > 2100) {
+  if (year < 1900 || year > 2100)
+  {
     return false;
   }
   return true;
 }
 
-void createNewAcc(struct User u) {
+void createNewAcc(struct User u)
+{
   struct Record r;
   struct Record cr;
   char userName[50];
@@ -28,7 +33,8 @@ noAccount:
 
   printf("\n\t\tEnter today's date(mm/dd/yyyy): ");
   scanf("%d/%d/%d", &r.deposit.month, &r.deposit.day, &r.deposit.year);
-  if (!valid_date(r.deposit.month, r.deposit.day, r.deposit.year)) {
+  if (!valid_date(r.deposit.month, r.deposit.day, r.deposit.year))
+  {
     goto noAccount;
   }
   printf("\n\t\tEnter the account number: ");
@@ -39,7 +45,11 @@ noAccount:
   printf("\n\t\tEnter the phone number: ");
   scanf("%d", &r.phone);
   printf("\n\t\tEnter amount to deposit: $");
-  scanf("%lf", &r.amount);
+  if (!parseFloat(&r.amount))
+  {
+    printf("\n\t\tInvalid input.\n\n");
+    choose_exit_or_menu(u);
+  }
   printf("\n\t\tChoose the type of account:\n\t\t\t-> saving\n\t\t\t-> current\n\t\t\t-> "
          "fixed01(for 1 year)\n\t\t\t-> fixed02(for 2 years)\n\t\t\t-> fixed03(for 3 "
          "years)\n\n\t\t\tEnter your choice: ");
@@ -49,13 +59,15 @@ noAccount:
       strcmp(r.accountType, "fixed02") != 0 &&
       strcmp(r.accountType, "fixed03") != 0 &&
       strcmp(r.accountType, "saving") != 0 &&
-      strcmp(r.accountType, "current") != 0) {
+      strcmp(r.accountType, "current") != 0)
+  {
     printf("Invalid account type!.\n");
     choose_exit_or_menu(u);
   }
 
   int result = new_record(r, u.name);
-  if (result == SQLITE_CONSTRAINT) {
+  if (result == SQLITE_CONSTRAINT)
+  {
     printf("✖ This Account already exists for this user\n\n");
     goto noAccount;
   }
