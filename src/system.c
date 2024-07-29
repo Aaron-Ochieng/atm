@@ -26,23 +26,23 @@ noAccount:
   system("clear");
   printf("\t\t\t===== New record =====\n");
 
-  printf("\nEnter today's date(mm/dd/yyyy):");
+  printf("\n\t\tEnter today's date(mm/dd/yyyy): ");
   scanf("%d/%d/%d", &r.deposit.month, &r.deposit.day, &r.deposit.year);
   if (!valid_date(r.deposit.month, r.deposit.day, r.deposit.year)) {
     goto noAccount;
   }
-  printf("\nEnter the account number:");
+  printf("\n\t\tEnter the account number: ");
   scanf("%d", &r.accountNbr);
-  printf("\nEnter the country:");
+  printf("\n\t\tEnter the country: ");
   read_string(r.country, sizeof(r.country));
 
-  printf("\nEnter the phone number:");
+  printf("\n\t\tEnter the phone number: ");
   scanf("%d", &r.phone);
-  printf("\nEnter amount to deposit: $");
+  printf("\n\t\tEnter amount to deposit: $");
   scanf("%lf", &r.amount);
-  printf("\nChoose the type of account:\n\t-> saving\n\t-> current\n\t-> "
-         "fixed01(for 1 year)\n\t-> fixed02(for 2 years)\n\t-> fixed03(for 3 "
-         "years)\n\n\tEnter your choice:");
+  printf("\n\t\tChoose the type of account:\n\t\t\t-> saving\n\t\t\t-> current\n\t\t\t-> "
+         "fixed01(for 1 year)\n\t\t\t-> fixed02(for 2 years)\n\t\t\t-> fixed03(for 3 "
+         "years)\n\n\t\t\tEnter your choice: ");
 
   read_string(r.accountType, sizeof(r.accountType));
   if (strcmp(r.accountType, "fixed01") != 0 &&
@@ -59,6 +59,6 @@ noAccount:
     printf("✖ This Account already exists for this user\n\n");
     goto noAccount;
   }
-  printf("\n✔ Success!\n\n");
+  printf("\n\t\t✔ Success!\n\n");
   choose_exit_or_menu(u);
 }
