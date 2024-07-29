@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 struct Date {
   int month, day, year;
@@ -48,3 +49,4 @@ void choose_exit_or_menu(struct User u);
 void deleteAccount(struct User u);
 int account_info(int accountNumber, int user_id);
 void rot13(char *str);
+bool parseFloat(double *myDouble);
