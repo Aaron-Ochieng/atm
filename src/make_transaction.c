@@ -29,7 +29,7 @@ void makeTransaction(struct User u) {
     choose_exit_or_menu(u);
   }
 
-  printf("\n\t\tDo you want to:\n\t\t\t1->Withdraw\n\t\t\t2->Deposit\n");
+  printf("\n\t\tDo you want to:\n\t\t\t1->Withdraw\n\n\t\t\t2->Deposit\n");
   scanf("%s", temp_choice);
 
   /* validating input */
@@ -60,11 +60,11 @@ void makeTransaction(struct User u) {
     scanf("%lf", &r.amount);
 
     if (r.amount < 1) {
-      printf("\n\t\tInvalid amount to deposit!");
+      printf("\n\t\tInvalid amount to deposit!\n\n");
       choose_exit_or_menu(u);
     }
     deposit_to_account(r.accountNbr, r.amount, u.id);
-    printf("\n\t\tSuccess!");
+    printf("\n\t\tSuccess!\n\n");
   }
   choose_exit_or_menu(u);
 }
