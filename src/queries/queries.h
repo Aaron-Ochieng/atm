@@ -23,3 +23,4 @@ int withdraw_from_account(int account_number, double amount_to_deduct,
                           int user_id);
 int delete_account(int accountNbr, int user_id);
 int transfer_account(int userID, int accountNumber);
+int account_type(int accountNumber,char *accType);
