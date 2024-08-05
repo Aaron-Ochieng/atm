@@ -41,7 +41,7 @@ prompt:
 
   if (choice == 1) {
     system("clear");
-    printf("Enter the new phone number:");
+    printf("\n\t\tEnter the new phone number:");
     scanf("%s", phone_temp);
 
     /* Atoi function to check for valid entry of intergers only. -1 is returned
@@ -61,7 +61,7 @@ prompt:
     printf("An error occured. \n");
   } else if (choice == 2) {
     system("clear");
-    printf("Enter country:");
+    printf("\n\t\tEnter country:");
     read_string(record.country, sizeof(record.country));
 
     if (update_country(record.accountNbr, record.country, userId) ==
