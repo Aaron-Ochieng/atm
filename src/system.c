@@ -27,6 +27,10 @@ void createNewAcc(struct User u)
   struct Record cr;
   char userName[50];
 
+  //
+  char temp_acc[100]=""; 
+  char temp_phone[100];
+
 noAccount:
   system("clear");
   printf("\t\t\t===== New record =====\n");
@@ -38,12 +42,22 @@ noAccount:
     goto noAccount;
   }
   printf("\n\t\tEnter the account number: ");
-  scanf("%d", &r.accountNbr);
+  scanf("%s", temp_acc);
+  //check for valid account number
+  if ((r.accountNbr = atm_atoi(temp_acc)) == -1){
+    printf("\n\t\tInvalid input\n");
+    choose_exit_or_menu(u);
+  }
   printf("\n\t\tEnter the country: ");
   read_string(r.country, sizeof(r.country));
 
   printf("\n\t\tEnter the phone number: ");
-  scanf("%d", &r.phone);
+  scanf("%s", temp_phone);
+  if ((r.phone = atm_atoi(temp_phone)) == -1){
+    printf("\n\t\tInvalid phone number\n\n");
+    choose_exit_or_menu(u);
+  }
+
   printf("\n\t\tEnter amount to deposit: $");
   if (!parseFloat(&r.amount))
   {
