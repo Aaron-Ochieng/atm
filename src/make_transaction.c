@@ -1,6 +1,7 @@
 #include "header.h"
 #include "queries/queries.h"
 #include <stdio.h>
+#include <string.h>
 
 void makeTransaction(struct User u) {
   struct Record r;
@@ -29,6 +30,15 @@ void makeTransaction(struct User u) {
     choose_exit_or_menu(u);
   }
 
+  // check account type
+  account_type(r.accountNbr, r.accountType);
+
+  if (strcmp(r.accountType, "saving") != 0 ||
+      strcmp(r.accountType, "current") != 0) {
+    printf("\n\t\tYou cannot deposit or withdraw in fixed accounts\n\n");
+    choose_exit_or_menu(u);
+  }
+
   printf("\n\t\tDo you want to:\n\n\t\t\t1->Withdraw\n\t\t\t2->Deposit\n");
   scanf("%s", temp_choice);
 
@@ -47,7 +57,6 @@ void makeTransaction(struct User u) {
       choose_exit_or_menu(u);
     }
 
-
     if (r.amount < 1) {
       printf("\n\t\tThe withdrawal amount must be greater than 0.\n");
       choose_exit_or_menu(u);
@@ -65,7 +74,6 @@ void makeTransaction(struct User u) {
       printf("\n\t\tInvalid Input\n\n");
       choose_exit_or_menu(u);
     }
-
 
     if (r.amount < 1) {
       printf("\n\t\tInvalid amount to deposit!\n\n");
