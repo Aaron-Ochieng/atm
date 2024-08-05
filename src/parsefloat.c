@@ -22,8 +22,6 @@ bool isNumeric(const char *str)
 bool parseFloat(double *myDouble)
 {
     char input[100];
-
-    printf("Enter a double value: ");
     if (scanf("%99s", input) != 1 || !isNumeric(input))
     {
         // %99s specifies the maximum number of characters to read from the input.
