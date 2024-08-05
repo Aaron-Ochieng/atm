@@ -52,7 +52,7 @@ void mainMenu(struct User u) {
     exit(1);
     break;
   default:
-    printf("Invalid operation!\n");
+    printf("\n\t\tInvalid operation!\n");
   }
 };
 
