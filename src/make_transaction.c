@@ -31,10 +31,7 @@ void makeTransaction(struct User u) {
   }
 
   // check account type
-  account_type(r.accountNbr, r.accountType);
-
-  if (strcmp(r.accountType, "saving") != 0 ||
-      strcmp(r.accountType, "current") != 0) {
+  if ( account_type(r.accountNbr) == -11) {
     printf("\n\t\tYou cannot deposit or withdraw in fixed accounts\n\n");
     choose_exit_or_menu(u);
   }
