@@ -65,3 +65,8 @@ Password: q1w2e3r4t5y6
 ***Creating an account.***
 
 Creating account has a feature which you cannot add a month greater than `12` and year `must` be between the year `1900` - `2100`. if not the account won't be created.
+
+***Password Encryption ***
+This project utilizes ROT13 algorithm for password Encryption which isnt that very secure for production.
+
+
