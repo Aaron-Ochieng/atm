@@ -58,7 +58,7 @@ int check_account_record(int accountNumber, int user_id) {
              interest,r.deposit.day);
 
     } else if (strcmp(r.accountType, "fixed01") == 0) {
-      interest = r.amount * 0.04 * (1.0 / 12);
+      interest = r.amount * 0.04 * (12.0 / 12);
       printf("\n\n\t\tYou will get $%.2f as interest on day %d of every month.",
              interest,r.deposit.day);
 
