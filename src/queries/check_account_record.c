@@ -54,23 +54,23 @@ int check_account_record(int accountNumber, int user_id) {
   displayprofits:
     if (strcmp(r.accountType, "saving") == 0) {
       interest = r.amount * 0.07 * (1.0 / 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day 10 of every month.",
-             interest);
+      printf("\n\n\t\tYou will get $%.2f as interest on day %d of every month.",
+             interest,r.deposit.day);
 
     } else if (strcmp(r.accountType, "fixed01") == 0) {
       interest = r.amount * 0.04 * (1.0 / 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day 10 of every month.",
-             interest);
+      printf("\n\n\t\tYou will get $%.2f as interest on day %d of every month.",
+             interest,r.deposit.day);
 
     } else if (strcmp(r.accountType, "fixed02") == 0) {
       interest = r.amount * 0.05 * (24.0/ 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day 10 of every month.",
-             interest);
+      printf("\n\n\t\tYou will get $%.2f as interest on day %d of every month.",
+             interest,r.deposit.day);
 
     } else if (strcmp(r.accountType, "fixed03") == 0) {
       interest = r.amount * 0.08 * (36.0/ 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day 10 of every month.",
-             interest);
+      printf("\n\n\t\tYou will get $%.2f as interest on day %d of every month.",
+             interest,r.deposit.day);
 
     } else if (strcmp(r.accountType, "current") == 0) {
       printf("\n\n\t\tYou will not get interests because the account is of "
