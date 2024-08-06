@@ -2,7 +2,7 @@
 
 double check_amount(int account_number) {
   /*Initialize amount*/
-  double amount = -1;
+  double amount;
 
   sqlite3_stmt *stmt;
 
@@ -65,7 +65,7 @@ int withdraw_from_account(int account_number, double amount_to_deduct,
     return SQLITE_ERROR;
   }
 
-  sqlite3_bind_int(stmt, 1, accountBalance);
+  sqlite3_bind_double(stmt, 1, accountBalance);
   sqlite3_bind_int(stmt, 2, account_number);
   sqlite3_bind_int(stmt, 3, user_id);
 
