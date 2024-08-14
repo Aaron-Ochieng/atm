@@ -59,18 +59,18 @@ int check_account_record(int accountNumber, int user_id) {
 
     } else if (strcmp(r.accountType, "fixed01") == 0) {
       interest = r.amount * 0.04 * (12.0 / 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day %d of every month.",
-             interest,r.deposit.day);
+      printf("\n\n\t\tYou will get $%.2f as interest on %d/%d/%d.",
+             interest,r.deposit.month,r.deposit.day,r.deposit.year+1);
 
     } else if (strcmp(r.accountType, "fixed02") == 0) {
       interest = r.amount * 0.05 * (24.0/ 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day %d of every month.",
-             interest,r.deposit.day);
+      printf("\n\n\t\tYou will get $%.2f as interest on %d/%d/%d",
+             interest,r.deposit.month,r.deposit.day,r.deposit.year+2);
 
     } else if (strcmp(r.accountType, "fixed03") == 0) {
       interest = r.amount * 0.08 * (36.0/ 12);
-      printf("\n\n\t\tYou will get $%.2f as interest on day %d of every month.",
-             interest,r.deposit.day);
+      printf("\n\n\t\tYou will get $%.2f as interest on %d/%d/%d",
+             interest,r.deposit.month,r.deposit.day,r.deposit.year+3);
 
     } else if (strcmp(r.accountType, "current") == 0) {
       printf("\n\n\t\tYou will not get interests because the account is of "
